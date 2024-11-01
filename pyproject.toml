@@ -19,18 +19,18 @@ torchvision = {version = "^0.20.1+cu124", source = "pytorch-gpu-src"}
 
 
 [tool.poetry.group.dev.dependencies]
-isort = "^5.13.2"
-black = "^24.10.0"
-mypy = "^1.13.0"
-clearml = "^1.16.5"
-nbdime = "^4.0.2"
 pre-commit = "^4.0.1"
+isort = "^5.13.2"
+mypy = "^1.13.0"
+ruff = "^0.7.1"
+nbdime = "^4.0.2"
 nbstripout = "^0.7.1"
-flake8 = "^7.1.1"
-lightning = "^2.4.0"
 notebook = "^7.2.2"
+clearml = "^1.16.5"
+lightning = "^2.4.0"
 tensorboard = "^2.18.0"
 seaborn = "^0.13.2"
+split-folders = "^0.5.1"
 
 
 [[tool.poetry.source]]
@@ -44,69 +44,61 @@ url = "https://download.pytorch.org/whl/cpu"
 priority = "explicit"
 
 
-[tool.black]
-# https://black.readthedocs.io/en/stable/index.html
-target-version = ["py312"]
-line-length = 88
-color = true
+[tool.ruff]
+# https://docs.astral.sh/ruff/
+target-version = "py312"
+extend-exclude = [".idea"]
+fix = true
 
-exclude = '''
-/(
-    \.git
-    | \.hg
-    | \.mypy_cache
-    | \.tox
-    | \.venv
-    | _build
-    | buck-out
-    | build
-    | dist
-    | env
-    | venv
-)/
-'''
+
+[tool.ruff.lint]
+# https://docs.astral.sh/ruff/linter/
+extend-select = [
+    "N",   # pep8-naming
+    "RUF", # ruff checks
+    "SIM", # flake8-simplify
+    "TCH", # flake8-type-checking
+    "TID", # flake8-tidy-imports
+    "UP",  # pyupgrade
+]
+
+ignore = [
+    "B904", # use 'raise ... from err'
+    "B905", # use explicit 'strict=' parameter with 'zip()'
+]
+
+unfixable = [
+    "ERA", # do not autoremove commented out code
+]
+
+
+[tool.ruff.format]
+# https://docs.astral.sh/ruff/formatter/
+quote-style = "double"
 
 
 [tool.isort]
-# https://github.com/timothycrosley/isort/
+# https://pycqa.github.io/isort/docs/configuration/options.html
 py_version = 312
-line_length = 88
-
-known_typing = ["typing", "types", "typing_extensions", "mypy", "mypy_extensions"]
-sections = ["FUTURE", "TYPING", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
-include_trailing_comma = true
 profile = "black"
-multi_line_output = 3
-indent = 4
 color_output = true
+lines_after_imports = 2
 
 
 [tool.mypy]
-# https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
+# https://mypy.readthedocs.io/en/stable/config_file.html
 python_version = 3.12
 pretty = true
 show_traceback = true
 color_output = true
-exclude = ['tests', '.venv']
+exclude = [".venv", ".git", ".idea"]
 
-allow_redefinition = false
-check_untyped_defs = false
-disallow_any_generics = true
-disallow_incomplete_defs = false
-ignore_missing_imports = false
+disallow_untyped_defs = true
 implicit_reexport = false
-no_implicit_optional = false
 show_column_numbers = true
-show_error_codes = true
 show_error_context = true
-strict_equality = true
-strict_optional = true
-warn_no_return = false
+show_error_codes = true
 warn_redundant_casts = true
-warn_return_any = false
 warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
-
-[tool.mypy-ultralytics]
-ignore_missing_imports = true
