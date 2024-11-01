@@ -50,15 +50,22 @@ repos:
         language: python
         types: [python]
 
-      - id: mypy
-        name: mypy
-        description: Check types
-        entry: poetry run mypy --config-file pyproject.toml
-        language: python
-        types: [python]
+#      - id: mypy
+#        name: mypy
+#        description: Check types
+#        entry: poetry run mypy --config-file pyproject.toml
+#        language: python
+#        types: [python]
 
 
   - repo: https://github.com/kynan/nbstripout
     rev: 0.7.1
     hooks:
       - id: nbstripout
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.13.0
+    hooks:
+      - id: mypy
+#        additional_dependencies: [ "types-pyyaml" ]
+        exclude: tests/
