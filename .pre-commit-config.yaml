@@ -50,13 +50,6 @@ repos:
         language: python
         types: [python]
 
-#      - id: mypy
-#        name: mypy
-#        description: Check types
-#        entry: poetry run mypy --config-file pyproject.toml
-#        language: python
-#        types: [python]
-
 
   - repo: https://github.com/kynan/nbstripout
     rev: 0.7.1
@@ -67,5 +60,5 @@ repos:
     rev: v1.13.0
     hooks:
       - id: mypy
-#        additional_dependencies: [ "types-pyyaml" ]
+        args: ["--config-file", "pyproject.toml"]
         exclude: tests/
