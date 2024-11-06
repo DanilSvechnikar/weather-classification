@@ -178,3 +178,4 @@ cython_debug/
 
 # My ignores
 /data/
+/lightning_logs/

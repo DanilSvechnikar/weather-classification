@@ -1,0 +1,47 @@
+# The file contains hyperparameters of training and validation.
+
+# clearml settings
+clearml_enable: False
+clearml_proj_name: "Weather Classification"
+task_name: "train efficient_b1"
+
+save_dir: "lightning_logs"
+dataset_dname: "WeatherDataset"
+
+# If not all the epochs have passed
+resume_train: False
+model_fpath: "${save_dir}/version_0/checkpoints/best.ckpt"
+
+# Seed params
+seed_everything_enable: True
+seed: 42
+seed_workers: True
+deterministic: True
+
+# Hyperparameters
+lr: 1.0e-1
+batch_size: 128
+num_epochs: 6
+early_stopping_patience: 3
+
+# Profiler
+profiler_enable: False
+
+# Load data
+num_workers: 2
+persistent_workers: True
+
+# lr_scheduler settings
+lr_scheduler_enable: True
+
+
+# Disable hydra logging to the catalog
+defaults:
+    - _self_
+    - override hydra/hydra_logging: disabled
+    - override hydra/job_logging: disabled
+
+hydra:
+    output_subdir: null
+    run:
+        dir: .
