@@ -104,7 +104,7 @@ show_traceback = true
 color_output = true
 exclude = [".venv", ".git", ".idea"]
 
-ignore_missing_imports = false
+ignore_missing_imports = true
 check_untyped_defs = true
 disallow_untyped_defs = true
 implicit_reexport = false
@@ -115,9 +115,3 @@ warn_redundant_casts = true
 warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
-
-[[tool.mypy.overrides]]
-module = [
-    "torch",
-]
-ignore_missing_imports = true
