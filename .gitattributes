@@ -1,2 +1,4 @@
 *.ipynb	diff=jupyternotebook
 *.ipynb	merge=jupyternotebook
+
+EfficientNet.torchscript filter=lfs diff=lfs merge=lfs -text
